@@ -1,0 +1,65 @@
+
+create table clients(
+Client_id int primary key,
+Cname varchar(30) not null,
+Caddree varchar(30),
+Cemail varchar(30) not null,
+Cphone varchar(30),
+Cbusiness varchar(30) not null,
+)
+
+
+
+create table Departments(
+Deptno	int	Primary Key,	
+Dname 	VARCHAR(15)	Not Null,	
+Loc	VARCHAR(20)		
+)
+
+
+create table Employees(
+Empno 	int Primary Key,	
+Ename	VARCHAR(20)	Not Null,	
+Job 	VARCHAR(15)	,	
+Salary	float CHECK(Salary > 0),
+Deptno	int	 references Departments(Deptno)	
+)
+
+
+create table Projects(
+Pid	int 	Primary Key	,
+Descr	VARCHAR(30)	Not Null,
+Start_Date	DATE,
+Planned_End_Date	DATE,
+Actual_End_date	DATE ,
+Budget	int	check(budget>0),
+Client_id	int references Clients(Client_id)
+)
+
+
+
+ create table EmpProjectTasks( 
+Pid 	int	references Projects(Pid),	
+Empno 	int	references Employees(Empno), 
+Start_Date 	DATE,		
+End_Date 	DATE,
+Task	VARCHAR(25)	Not Null,	
+Status	VARCHAR(15)	Not Null,
+primary key(Pid,Empno)
+)
+
+select * from Clients
+insert into Clients values(101,'ACC','Jamnagar','acc@gmail.com','22222222','Manufacturing'),
+(102,'TCS','Chennai','tcs@gmail.com','33333333','Consultant'),(103,'Vedantu','Delhi','vedantu@gmail.com','44444444','Education')
+
+select * from departments
+insert into Departments values(1001,'Admin','Bangalore'),(1002,'HR','pune'),(1003,'Sales','Mumbai'),(1004,'Head','Delhi')
+
+select * from Employees
+insert into Employees values(5003,'veer','Marketing',90000,1001)
+
+select * from Projects
+insert into projects values(504,'Track','2016-09-08','2021-07-06','2022-08-31',10000000,100)
+
+select * from EmpProjectTasks
+insert into EmpProjectTasks values(504,5004,'2021-08-07','2022-12-08','analysis','incompleted')
